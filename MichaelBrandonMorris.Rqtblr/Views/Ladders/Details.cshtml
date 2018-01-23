@@ -1,0 +1,71 @@
+﻿@model Ladder
+
+@{
+}
+
+<h2>Ladder</h2>
+<hr/>
+
+<dl>
+    <dt>
+        Name
+    </dt>
+
+    <dd>
+        @Model.Name
+    </dd>
+</dl>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h3>Players</h3>
+        @foreach (var player in Model.LadderPlayers.Select(x => x.Player))
+        {
+            <div class="row">
+                <div class="col-sm-4">
+                    @player.FirstName
+                </div>
+                <div class="col-sm-4">
+                    @player.LastName
+                </div>
+                <div class="col-sm-4">
+                    <a asp-action="Details" asp-controller="Players" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-sm-6">
+        <h3>Matches</h3>
+        @foreach (var match in Model.Matches)
+        {
+            <div class="row">
+                <div class="col-sm-3">
+                    @if (match.TeamOne.PlayerOne != null)
+                    {
+                        @match.TeamOne.PlayerOne.FirstName @match.TeamOne.PlayerOne.LastName
+                    }
+
+                    @if (match.TeamOne.PlayerTwo != null)
+                    {
+                        @match.TeamOne.PlayerTwo.FirstName @match.TeamOne.PlayerTwo.LastName
+                    }
+
+                </div>
+                <div class="col-sm-3">
+                    @if (match.TeamTwo.PlayerOne != null)
+                    {
+                        @match.TeamTwo.PlayerOne.FirstName @match.TeamTwo.PlayerOne.LastName
+                    }
+
+                    @if (match.TeamTwo.PlayerTwo != null)
+                    {
+                        @match.TeamTwo.PlayerTwo.FirstName @match.TeamTwo.PlayerTwo.LastName
+                    }
+                </div>
+                <div class="col-sm-4">
+                    <a asp-action="Details" asp-controller="Matches">Details</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

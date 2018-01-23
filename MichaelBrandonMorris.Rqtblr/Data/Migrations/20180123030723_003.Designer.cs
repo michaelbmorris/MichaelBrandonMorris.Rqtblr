@@ -12,9 +12,10 @@ using System;
 namespace MichaelBrandonMorris.Rqtblr.Data.Migrations
 {
     [DbContext(typeof(RqtblrDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180123030723_003")]
+    partial class _003
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

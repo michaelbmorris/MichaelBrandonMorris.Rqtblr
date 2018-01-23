@@ -1,0 +1,19 @@
+﻿@model IList<User>
+
+    @{
+        
+    }
+
+<h2>Players</h2>
+<hr/>
+
+<a asp-action="Create">Create</a>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-sm-12">
+            @item.FirstName @item.LastName
+        </div>
+    </div>
+}

@@ -1,0 +1,37 @@
+﻿@model MichaelBrandonMorris.Rqtblr.Models.LadderViewModels.LadderAssignPlayersModel
+
+@{
+}
+
+<h2>Assign Players</h2>
+<hr/>
+
+<dl class="dl-horizontal">
+    <dt>
+        Ladder
+    </dt>
+    
+    <dd>
+        @Model.Ladder.Name
+    </dd>
+    
+    <dt>
+        Players
+    </dt>
+</dl>
+
+<div class="row">
+    <form asp-action="AssignPlayers" class="col-sm-10 col-sm-offset-2">
+        @Html.HiddenFor(model => model.Ladder.Id)
+
+        @foreach (var player in Model.Players)
+        {
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="playerIds" value="@player.Id" @(Model.Ladder.LadderPlayers.Any(x => x.PlayerId == player.Id) ? "checked" : string.Empty)/> @player.FirstName @player.LastName
+                </label>
+            </div>
+        }
+        <input type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
+</div>

@@ -1,0 +1,9 @@
+﻿@model MichaelBrandonMorris.Rqtblr.Models.PlayersViewModels.PlayerEditModel
+
+@{
+}
+
+<form asp-action="Create">
+    @Html.EditorFor(model => model)
+    <input type="submit" class="btn btn-primary"/>
+</form>

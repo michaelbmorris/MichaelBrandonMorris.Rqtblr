@@ -1,0 +1,10 @@
+﻿@model MichaelBrandonMorris.Rqtblr.Models.LadderViewModels.LadderEditModel
+
+@{
+    
+}
+
+<form asp-action="Create">
+    @Html.EditorFor(model => model)
+    <input type="submit" class="btn btn-default" value="Create"/>
+</form>

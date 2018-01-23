@@ -12,9 +12,10 @@ using System;
 namespace MichaelBrandonMorris.Rqtblr.Data.Migrations
 {
     [DbContext(typeof(RqtblrDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180123005128_002")]
+    partial class _002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,8 +75,6 @@ namespace MichaelBrandonMorris.Rqtblr.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("GameType");
-
-                    b.Property<bool>("IsComplete");
 
                     b.Property<int?>("LadderId");
 
@@ -289,12 +288,12 @@ namespace MichaelBrandonMorris.Rqtblr.Data.Migrations
             modelBuilder.Entity("MichaelBrandonMorris.Rqtblr.Models.LadderPlayer", b =>
                 {
                     b.HasOne("MichaelBrandonMorris.Rqtblr.Models.Ladder", "Ladder")
-                        .WithMany("LadderPlayers")
+                        .WithMany()
                         .HasForeignKey("LadderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MichaelBrandonMorris.Rqtblr.Models.User", "Player")
-                        .WithMany("LadderPlayers")
+                        .WithMany()
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
