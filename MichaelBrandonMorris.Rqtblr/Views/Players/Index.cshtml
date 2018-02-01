@@ -12,8 +12,11 @@
 @foreach (var item in Model)
 {
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             @item.FirstName @item.LastName
+        </div>
+        <div class="col-sm-6">
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
         </div>
     </div>
 }

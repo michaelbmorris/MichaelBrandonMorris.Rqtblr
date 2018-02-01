@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MichaelBrandonMorris.Rqtblr.Data;
+using MichaelBrandonMorris.Rqtblr.Models.MatchViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace MichaelBrandonMorris.Rqtblr.Controllers
 {
@@ -16,20 +16,22 @@ namespace MichaelBrandonMorris.Rqtblr.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var match = await Db.Matches.Include(x => x.TeamOne.PlayerOne)
-                .Include(x => x.TeamOne.PlayerTwo)
-                .Include(x => x.TeamTwo.PlayerOne)
-                .Include(x => x.TeamTwo.PlayerTwo)
-                .Include(x => x.Ladder)
-                .SingleOrDefaultAsync(x => x.Id == id);
+            var match = await Db.GetMatchAsync(id);
 
-            return View(match);
+            if (match == null)
+            {
+                return NotFound();
+            }
+
+            var model = new MatchDisplayModel(match);
+            return View(model);
         }
 
         public async Task<IActionResult> Index()
         {
-            var matches = await Db.Matches.ToListAsync();
-            return View(matches);
+            var matches = await Db.GetMatchesAsync();
+            var model = new MatchListModel(matches);
+            return View(model);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MichaelBrandonMorris.Rqtblr.Data;
@@ -96,25 +97,20 @@ namespace MichaelBrandonMorris.Rqtblr.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var ladder = await Db.Ladders.Include(x => x.LadderPlayers)
-                .ThenInclude(x => x.Player)
-                .Include(x => x.Matches).ThenInclude(x => x.TeamOne.PlayerOne)
-                .Include(x => x.Matches).ThenInclude(x => x.TeamOne.PlayerTwo)
-                .Include(x => x.Matches).ThenInclude(x => x.TeamTwo.PlayerOne)
-                .Include(x => x.Matches).ThenInclude(x => x.TeamTwo.PlayerTwo)
-                .SingleOrDefaultAsync(x => x.Id == id);
-
-            return View(ladder);
+            var ladder = await Db.GetLadderAsync(id);
+            var model = new LadderDisplayModel(ladder);
+            return View(model);
         }
 
         public async Task<IActionResult> Index()
         {
             var ladders = await Db.Ladders.Include(x => x.LadderPlayers)
                 .ToListAsync();
+
             return View(ladders);
         }
 
-        public async Task<IActionResult> PlayGame(int id)
+        public async Task<IActionResult> PlayMatch(int id)
         {
             var ladder = await Db.Ladders.Include(x => x.LadderPlayers)
                 .ThenInclude(x => x.Player)
@@ -133,17 +129,25 @@ namespace MichaelBrandonMorris.Rqtblr.Controllers
                 .Take(2)
                 .ToArray();
 
-            var match = new Match
-            {
-                TeamOne = new Team
+            var teamOne = new Team();
+
+            teamOne.TeamPlayers.Add(
+                new TeamPlayer
                 {
-                    PlayerOne = players[0]
-                },
-                TeamTwo = new Team
+                    Team = teamOne,
+                    Player = players[0]
+                });
+
+            var teamTwo = new Team();
+
+            teamTwo.TeamPlayers.Add(
+                new TeamPlayer
                 {
-                    PlayerOne = players[1]
-                }
-            };
+                    Team = teamTwo,
+                    Player = players[1]
+                });
+
+            var match = new Match(GameType.Singles, new List<Team>{teamOne, teamTwo});
 
             ladder.Matches.Add(match);
             await Db.SaveChangesAsync();

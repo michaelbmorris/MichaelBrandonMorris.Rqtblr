@@ -12,9 +12,10 @@ using System;
 namespace MichaelBrandonMorris.Rqtblr.Data.Migrations
 {
     [DbContext(typeof(RqtblrDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180201004815_006")]
+    partial class _006
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,11 +49,7 @@ namespace MichaelBrandonMorris.Rqtblr.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("RulesId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RulesId");
 
                     b.ToTable("Ladders");
                 });
@@ -101,30 +98,6 @@ namespace MichaelBrandonMorris.Rqtblr.Data.Migrations
                     b.HasIndex("TeamId");
 
                     b.ToTable("MatchTeam");
-                });
-
-            modelBuilder.Entity("MichaelBrandonMorris.Rqtblr.Models.Rules", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("CanTieMatch");
-
-                    b.Property<int>("GamesPerMatch");
-
-                    b.Property<int?>("GamesToWinMatch");
-
-                    b.Property<bool>("MustWinGameByTwoPoints");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("PointsToWinGame");
-
-                    b.Property<int?>("PointsToWinTiebreaker");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Rules");
                 });
 
             modelBuilder.Entity("MichaelBrandonMorris.Rqtblr.Models.Team", b =>
@@ -318,13 +291,6 @@ namespace MichaelBrandonMorris.Rqtblr.Data.Migrations
                     b.HasOne("MichaelBrandonMorris.Rqtblr.Models.Match", "Match")
                         .WithMany("Games")
                         .HasForeignKey("MatchId");
-                });
-
-            modelBuilder.Entity("MichaelBrandonMorris.Rqtblr.Models.Ladder", b =>
-                {
-                    b.HasOne("MichaelBrandonMorris.Rqtblr.Models.Rules", "Rules")
-                        .WithMany()
-                        .HasForeignKey("RulesId");
                 });
 
             modelBuilder.Entity("MichaelBrandonMorris.Rqtblr.Models.LadderPlayer", b =>

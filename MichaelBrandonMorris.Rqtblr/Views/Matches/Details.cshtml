@@ -1,0 +1,30 @@
+﻿@using MichaelBrandonMorris.Rqtblr.Models.MatchViewModels
+@model MichaelBrandonMorris.Rqtblr.Models.MatchViewModels.MatchDisplayModel
+@{
+}
+
+<h2>Match Details</h2>
+<hr/>
+
+<dl class="dl-horizontal">
+    <dt>
+        Game Type
+    </dt>
+    <dd>
+        @Model.GameType
+    </dd>
+    @for (var i = 0; i < Model.Teams.Count; i++)
+    {
+        <dt>
+            Team @(i+1)
+        </dt>
+        <dd>
+            @foreach (var player in Model.Teams[i].Players)
+            {
+                <p>
+                    @player.FirstName @player.LastName
+                </p>
+            }
+        </dd>
+    }
+</dl>

@@ -1,0 +1,32 @@
+﻿@model IList<Rules>
+@{
+}
+
+<h2>Rules</h2>
+<hr/>
+
+<a asp-action="Create">Create</a>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <td>
+            Name
+        </td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                <a asp-action="Details">Details</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

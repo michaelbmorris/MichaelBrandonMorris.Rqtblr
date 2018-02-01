@@ -1,0 +1,11 @@
+﻿@model MichaelBrandonMorris.Rqtblr.Models.RulesViewModels.RulesEditModel
+@{
+}
+
+<h2>Create Rules</h2>
+<hr/>
+
+<form asp-action="Create">
+    @Html.EditorFor(model => model)
+    <input type="submit" class="btn btn-primary" value="Submit"/>
+</form>

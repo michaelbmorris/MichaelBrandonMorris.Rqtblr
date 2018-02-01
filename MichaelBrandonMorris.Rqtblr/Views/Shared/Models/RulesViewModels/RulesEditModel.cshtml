@@ -1,0 +1,13 @@
+﻿@model MichaelBrandonMorris.Rqtblr.Models.RulesViewModels.RulesEditModel
+@{
+    
+}
+
+@Html.EditorFor(model => model.Name)
+@Html.EditorFor(model => model.GamesPerMatch)
+@Html.EditorFor(model => model.GamesToWinMatch)
+@Html.HiddenFor(model => model.Id)
+@Html.EditorFor(model => model.MustWinGameByTwoPoints)
+@Html.EditorFor(model => model.PointsToWinGame)
+@Html.EditorFor(model => model.PointsToWinTiebreaker)
+@Html.EditorFor(model => model.CanTieMatch)

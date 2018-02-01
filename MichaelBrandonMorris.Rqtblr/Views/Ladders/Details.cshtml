@@ -1,4 +1,4 @@
-﻿@model Ladder
+﻿@model MichaelBrandonMorris.Rqtblr.Models.LadderViewModels.LadderDisplayModel
 
 @{
 }
@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col-sm-6">
         <h3>Players</h3>
-        @foreach (var player in Model.LadderPlayers.Select(x => x.Player))
+        @foreach (var player in Model.Players)
         {
             <div class="row">
                 <div class="col-sm-4">
@@ -39,31 +39,17 @@
         @foreach (var match in Model.Matches)
         {
             <div class="row">
-                <div class="col-sm-3">
-                    @if (match.TeamOne.PlayerOne != null)
-                    {
-                        @match.TeamOne.PlayerOne.FirstName @match.TeamOne.PlayerOne.LastName
-                    }
-
-                    @if (match.TeamOne.PlayerTwo != null)
-                    {
-                        @match.TeamOne.PlayerTwo.FirstName @match.TeamOne.PlayerTwo.LastName
-                    }
-
-                </div>
-                <div class="col-sm-3">
-                    @if (match.TeamTwo.PlayerOne != null)
-                    {
-                        @match.TeamTwo.PlayerOne.FirstName @match.TeamTwo.PlayerOne.LastName
-                    }
-
-                    @if (match.TeamTwo.PlayerTwo != null)
-                    {
-                        @match.TeamTwo.PlayerTwo.FirstName @match.TeamTwo.PlayerTwo.LastName
-                    }
-                </div>
+                @foreach (var team in match.Teams)
+                {
+                    <div class="col-sm-3">
+                        @foreach (var player in team.Players)
+                        {
+                            <p>@player.FirstName @player.LastName</p>
+                        }
+                    </div>
+                }
                 <div class="col-sm-4">
-                    <a asp-action="Details" asp-controller="Matches">Details</a>
+                    <a asp-action="Details" asp-controller="Matches" asp-route-id="@match.Id">Details</a>
                 </div>
             </div>
         }

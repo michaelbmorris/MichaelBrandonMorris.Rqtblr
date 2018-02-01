@@ -8,17 +8,27 @@
 
 <a asp-action="Create" class="btn btn-primary">Create</a>
 
-@foreach (var item in Model)
-{
-    <div class="row">
-        <div class="col-sm-4">
-            @item.Name
-        </div>
-        <div class="col-sm-4">
-            @item.LadderPlayers.Count
-        </div>
-        <div class="col-sm-4">
-            <a asp-action="AssignPlayers" asp-route-id="@item.Id">Assign Players</a>
-        </div>
-    </div>
-}
+<table class="table table-striped">
+    <thead>
+    
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.LadderPlayers.Count
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
+            <td>
+                <a asp-action="AssignPlayers" asp-route-id="@item.Id">Assign Players</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

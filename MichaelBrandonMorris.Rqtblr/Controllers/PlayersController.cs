@@ -36,6 +36,22 @@ namespace MichaelBrandonMorris.Rqtblr.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Details(string id)
+        {
+            //var player = await Db.FindAsync<User>(id);
+
+            var player = await Db.Users.Include(x => x.TeamPlayers)
+                .ThenInclude(x => x.Team)
+                .SingleOrDefaultAsync(x => id == x.Id);
+
+            if (player == null)
+            {
+                return NotFound();
+            }
+
+            return View(player);
+        }
+
         public async Task<IActionResult> Index()
         {
             var players = await Db.Users.ToListAsync();

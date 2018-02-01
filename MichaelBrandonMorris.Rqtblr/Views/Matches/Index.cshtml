@@ -1,0 +1,50 @@
+﻿@model MichaelBrandonMorris.Rqtblr.Models.MatchViewModels.MatchListModel
+@{
+}
+
+<h2>Matches</h2>
+<hr/>
+
+<table>
+    <thead>
+    <tr>
+        <td>
+            Game Type
+        </td>
+        <td>
+            Teams
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var match in Model.Matches)
+    {
+        <tr>
+            <td>
+                @match.GameType
+            </td>
+            <td>
+                <table>
+                    @foreach (var team in match.Teams)
+                    {
+                        <tr>
+                            @foreach (var player in team.Players)
+                            {
+                                <td>
+                                    @player.FirstName @player.LastName
+                                </td>
+                            }
+                        </tr>
+                    }
+                </table>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="match.Id">Details</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
